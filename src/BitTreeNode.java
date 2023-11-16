@@ -4,42 +4,40 @@
  * @author Che Glenn
  */
 
-public class BitTreeNode<T>{
+public class BitTreeNode{
 
   // +--------+------------------------------------------------------
   // | Fields |
   // +--------+
-  /**
-   * Value in this node
-   */
-  T value;
 
+
+  /**
+   * value stored in the node
+   */
+
+   String value;
+  
   /**
    * Left subtree
    */
 
-   BitTreeNode<T> left;
+   BitTreeNode left;
 
   /**
    * Right subtree
    */
 
-  BitTreeNode<T> right;
+  BitTreeNode right;
 
   // +--------------+------------------------------------------------
   // | Constructors |
   // +--------------+
 
-  public BitTreeNode(T value, BitTreeNode<T> left, BitTreeNode<T> right){
-    this.value = value;
-    this.left = left;
-    this.right = right;
+  public BitTreeNode(){
+    this.left = null;
+    this.right = null;
   } //BitTreeNode(T value, BitTreeNode, BitTreeNode)
 
-  public BitTreeNode(T value){
-    this(value, null, null);
-
-  }
   // +---------+-----------------------------------------------------
   // | Methods |
   // +---------+
