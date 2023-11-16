@@ -36,7 +36,7 @@ public class BitTree{
    * @param n
    */
   public BitTree(int n){
-    this.root = null;
+    this.root = new BitTreeNode();
     this.size = n;
   }
 
@@ -54,7 +54,7 @@ public class BitTree{
    */
   public void set(String bits, String value) throws Exception{
 
-    this.root = new BitTreeNode();
+
 
     /**
      * current to track what node we are on
@@ -75,13 +75,13 @@ public class BitTree{
      * If 1, create a new node on the right.
      * Else, throw exception
      */
-    for(int i = 0; i <= bits.length(); i++){
-      if((int) bits.charAt(i) == '0'){
+    for(int i = 0; i < bits.length(); i++){
+      if(bits.charAt(i) == '0'){
         current.left = new BitTreeNode();
         current = current.left;
       }
       else if(bits.charAt(i) == '1'){
-        current = new BitTreeNode();
+        current.right = new BitTreeNode();
         current = current.right;
       }else{
         throw new Exception("Invalid input, input contains value other than 0 or 1");
@@ -110,8 +110,8 @@ public class BitTree{
     /**
      * Loop through bits string, checking char at index i
      */
-    for(int i = 0; i <= bits.length(); i++){
-      if(((int) bits.charAt(i)) == 0){
+    for(int i = 0; i < bits.length(); i++){
+      if( bits.charAt(i) == '0'){
         /**
          * Check that the next node on the left is not null, if it is throw exception
          * If not move to the next node
@@ -121,7 +121,7 @@ public class BitTree{
         }
         current = current.left;
       } 
-      else if (((int) bits.charAt(i)) == 1){
+      else if ( bits.charAt(i) == '1'){
         if(current.right == null){
           throw new Exception("Invalid input, no such path");
         }
@@ -140,7 +140,22 @@ public class BitTree{
    * @param pen
    */
   public void dump(PrintWriter pen){
-    //STUB
+    BitTreeNode current = this.root;
+    String bits = "";
+
+    for(int i = 0; i < this.size; i++){
+      if(current.left == null){
+        current = current.right;
+        bits += "1";
+      }
+      else if (current.right == null){
+        current = current.left;
+        bits += "0";
+      }
+    }
+
+    bits += ("," + current.value);
+    pen.println(bits);
   }
 
   /**
