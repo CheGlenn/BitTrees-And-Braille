@@ -54,8 +54,6 @@ public class BitTree{
    */
   public void set(String bits, String value) throws Exception{
 
-
-
     /**
      * current to track what node we are on
      */
@@ -140,9 +138,16 @@ public class BitTree{
    * @param pen
    */
   public void dump(PrintWriter pen){
+
+    /**
+     * Set our current node, and create an empty string for storing path
+     */
     BitTreeNode current = this.root;
     String bits = "";
 
+    /**
+     * Loop through bit tree, adding 0 to 1 depending on whether there is a left or right node
+     */
     for(int i = 0; i < this.size; i++){
       if(current.left == null){
         current = current.right;
@@ -154,6 +159,9 @@ public class BitTree{
       }
     }
 
+    /**
+     * Add the current nodes value to bits, and print
+     */
     bits += ("," + current.value);
     pen.println(bits);
   }
@@ -164,15 +172,6 @@ public class BitTree{
    */
   public void load(InputStream source){
     //STUB
-  }
-
-  /**
-   * 
-   */
-
-  BitTreeNode makeTree(){
-    //STUB
-    return null;
   }
 
 
