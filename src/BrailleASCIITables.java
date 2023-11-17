@@ -102,7 +102,9 @@ public class BrailleASCIITables{
     /*
      * get the value assosciated with inputted bits
      */
-    return brailleToUnicode.get(bits);
+    char dots = (char) Integer.parseInt(brailleToUnicode.get(bits), 16);
+    return Character.toString(dots);
+
   }
 
 

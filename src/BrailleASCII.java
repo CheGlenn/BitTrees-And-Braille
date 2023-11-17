@@ -56,7 +56,7 @@ public class BrailleASCII {
         target += BrailleASCIITables.toUnicode(tempBraille.substring((i-1)*6, i*6));
       }
 
-    
+    pen.println(target);
       
 
     }
