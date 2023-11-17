@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Iterator;
@@ -167,13 +168,17 @@ public class BitTree{
   }
 
   /**
-   * Reads a series of lines of the form bits,value and stores them in the tree.
+   * Reads a series of lines of the form bits, value and stores them in the tree.
    * @param source
    */
-  public void load(InputStream source){
-    //STUB
+  public void load(InputStream source) throws Exception{
+    String readString = "";
+    while (source.read() != -1){
+      readString += (char) source.read();
+      }
+     
   }
-
-
-
 }
+
+
+
