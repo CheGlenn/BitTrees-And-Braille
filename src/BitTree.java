@@ -5,6 +5,11 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.Iterator;
 
+
+/**
+ * BitTree class that creates a BinaryTree using 0 and 1 to navigate left and right nodes. Depending on the "path" taken, a final nodes value will be set
+ * @author Che Glenn
+ */
 public class BitTree{
 
   // +--------+------------------------------------------------------
@@ -97,7 +102,7 @@ public class BitTree{
    * Follows the path through the tree given by bits, returning the value at the end. 
    * If there is no such path, or if bits is the incorrect length, get should throw an exception.
    * @param bits
-   * @return
+   * @return value
    */
   public String get(String bits) throws Exception{
     /**
@@ -153,9 +158,15 @@ public class BitTree{
    * @param path
    */
   void dump(PrintWriter pen, BitTreeNode node, String path){
+    /**
+     * Check if the current nodes value is null, if it is not null, then we can print the value and end the path
+     */
     if (node.value != null){
       pen.println(path + "," + node.value);
     } else{
+      /**
+       * Check if the nodes to the left and right are null, recursively calling dump on the sides that are not null
+       */
       if (node.left != null && node.right != null){
         dump(pen, node.left, path + "0");
         dump(pen, node.right, path + "1");
@@ -174,9 +185,14 @@ public class BitTree{
    * @param source
    */
   public void load(InputStream source) throws Exception{
+    /*
+     * First we convert our source input stream into something thats easier to manipulate
+     */
     InputStreamReader inputStreamReader = new InputStreamReader(source);
     BufferedReader reader = new BufferedReader(inputStreamReader);
-
+    /**
+     * continually check if the current line is null, if its not we call set on the two halves of the line
+     */
     String readString = "";
     while ((readString = reader.readLine()) != null){
       String[] setter = readString.split(",");

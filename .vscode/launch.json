@@ -1,0 +1,30 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "args": "${command:SpecifyProgramArgs}"
+        },
+        {
+            "type": "java",
+            "name": "BitTreeExpt",
+            "request": "launch",
+            "mainClass": "BitTreeExpt",
+            "projectName": "BitTrees-And-Braille_417030d2"
+        },
+        {
+            "type": "java",
+            "name": "BrailleASCII",
+            "request": "launch",
+            "mainClass": "BrailleASCII",
+            "projectName": "BitTrees-And-Braille_417030d2",
+            "args": "${command:SpecifyProgramArgs}"
+        }
+    ]
+}

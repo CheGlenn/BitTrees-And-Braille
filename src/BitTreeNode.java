@@ -38,8 +38,4 @@ public class BitTreeNode{
     this.right = null;
   } //BitTreeNode(T value, BitTreeNode, BitTreeNode)
 
-  // +---------+-----------------------------------------------------
-  // | Methods |
-  // +---------+
-
 }
