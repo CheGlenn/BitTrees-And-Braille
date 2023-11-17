@@ -1,5 +1,7 @@
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.Iterator;
 
@@ -23,14 +25,6 @@ public class BitTree{
   // | Constructors |
   // +--------------+
 
-  // /**
-  //  * Builds an empty BitTree
-  //  */
-  // public BitTree(){
-  //   this.size = 0;
-  //   this.root = null;
-   
-  // }
 
   /**
    * Builds a BitTree that will store mappings from strings of n bits to strings
@@ -76,12 +70,20 @@ public class BitTree{
      */
     for(int i = 0; i < bits.length(); i++){
       if(bits.charAt(i) == '0'){
+        if(current.left != null){
+        current = current.left;
+        } else{
         current.left = new BitTreeNode();
         current = current.left;
+        }
       }
       else if(bits.charAt(i) == '1'){
+        if(current.right != null){
+          current = current.right;
+        } else{
         current.right = new BitTreeNode();
         current = current.right;
+        }
       }else{
         throw new Exception("Invalid input, input contains value other than 0 or 1");
       }
@@ -134,37 +136,37 @@ public class BitTree{
     return current.value;
   }
 
+
+
   /**
    * Prints out the contents of the tree in CSV format. For example, one row of our braille tree will be “101100,M”
    * @param pen
    */
   public void dump(PrintWriter pen){
+    dump(pen, this.root, "");
+  }
 
-    /**
-     * Set our current node, and create an empty string for storing path
-     */
-    BitTreeNode current = this.root;
-    String bits = "";
-
-    /**
-     * Loop through bit tree, adding 0 to 1 depending on whether there is a left or right node
-     */
-    for(int i = 0; i < this.size; i++){
-      if(current.left == null){
-        current = current.right;
-        bits += "1";
+  /**
+   * Helper for dump, traverses the nodes and recursively calls dump to print path and final value
+   * @param pen
+   * @param node
+   * @param path
+   */
+  void dump(PrintWriter pen, BitTreeNode node, String path){
+    if (node.value != null){
+      pen.println(path + "," + node.value);
+    } else{
+      if (node.left != null && node.right != null){
+        dump(pen, node.left, path + "0");
+        dump(pen, node.right, path + "1");
       }
-      else if (current.right == null){
-        current = current.left;
-        bits += "0";
+      else if (node.left != null){
+        dump(pen, node.left, path + "0");
+      }
+      else if (node.right != null){
+        dump(pen, node.right, path + "1");
       }
     }
-
-    /**
-     * Add the current nodes value to bits, and print
-     */
-    bits += ("," + current.value);
-    pen.println(bits);
   }
 
   /**
@@ -172,11 +174,14 @@ public class BitTree{
    * @param source
    */
   public void load(InputStream source) throws Exception{
+    InputStreamReader inputStreamReader = new InputStreamReader(source);
+    BufferedReader reader = new BufferedReader(inputStreamReader);
+
     String readString = "";
-    while (source.read() != -1){
-      readString += (char) source.read();
+    while ((readString = reader.readLine()) != null){
+      String[] setter = readString.split(",");
+      set(setter[0], setter[1]);
       }
-     
   }
 }
 
