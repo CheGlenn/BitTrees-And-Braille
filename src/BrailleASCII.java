@@ -32,7 +32,12 @@ public class BrailleASCII {
       String input = args[1];
       String target = "";
       for(int i = 1; i < input.length()/5; i++){
-        target += BrailleASCIITables.toASCII(input.substring((i-1) * 6, i*6));
+        if(input.charAt(i) == '0' || input.charAt(i) == '1'){
+          target += BrailleASCIITables.toASCII(input.substring((i-1) * 6, i*6));
+        } else{
+          throw new Exception("Invalid input, input must only contain 0 or 1");
+        }
+        
       }
       pen.println(target);
     }
